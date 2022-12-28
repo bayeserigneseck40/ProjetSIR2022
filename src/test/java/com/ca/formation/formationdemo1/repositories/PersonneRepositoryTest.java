@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 
@@ -38,6 +39,17 @@ public class PersonneRepositoryTest {
   }
 
   // TODO : add test findAll
+  
+    @Test
+  public void findbyid(){
+    //Given
+    Personne pers = personneRepository.save(new Personne("seck", "baye", 24));
+    //When
+    Optional<Personne> person = personneRepository.findById(pers.getId());
+    //Then
+    assertNotNull(person);
+    assertEquals("tonux", person.get().getNom());
+  }
 
 
 
