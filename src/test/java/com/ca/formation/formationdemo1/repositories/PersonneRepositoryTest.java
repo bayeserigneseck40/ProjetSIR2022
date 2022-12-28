@@ -29,14 +29,14 @@ public class PersonneRepositoryTest {
   // TODO: ajouter un test sur les autres methodes comme delete, findByNom, etc...
   
   @Test
-  public void findbyid(){
+  public void findbyNom(){
     //Given
     Personne pers = personneRepository.save(new Personne("malcom", "mbaye", 12));
     //When
-      Optional<Personne> person = personneRepository.findById(pers.getId());
+      List<Personne> person = personneRepository.findByNom("malcom");
     //Then
     assertNotNull(person);
-    assertEquals("malcom", person.get().getNom());
+    assertNotEquals(0, person.size());
   }
 
 }
