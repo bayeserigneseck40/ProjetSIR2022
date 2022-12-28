@@ -48,7 +48,7 @@ public class PersonneRepositoryTest {
     Optional<Personne> person = personneRepository.findById(pers.getId());
     //Then
     assertNotNull(person);
-    assertEquals("tonux", person.get().getNom());
+    assertEquals("seck", person.get().getNom());
   }
 
 
