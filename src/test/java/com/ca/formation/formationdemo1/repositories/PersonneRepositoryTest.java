@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -25,7 +25,10 @@ public class PersonneRepositoryTest {
     assertNotNull(personne);
     assertEquals(personne.getNom(), "tonux");
   }
-  
+
+  // TODO: ajouter un test sur les autres methodes comme delete, findByNom, etc...
+
+
   @Test
   public void findbyNom(){
 
@@ -34,9 +37,8 @@ public class PersonneRepositoryTest {
     assertNotEquals(0, person.size());
   }
 
+  // TODO : add test findAll
 
-  // TODO: ajouter un test sur les autres methodes comme delete, findByNom, etc...
-  
 
 
 }
