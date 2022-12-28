@@ -26,7 +26,7 @@ pipeline{
                    
            }
         steps{
-              bat 'echo "Deploying into server"'
+              bat 'echo "Deploying into server server"'
         }
     }
        }
