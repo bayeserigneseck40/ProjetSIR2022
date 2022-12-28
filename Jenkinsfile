@@ -20,6 +20,26 @@ pipeline{
               bat 'mvn sonar:sonar'
         }
     }
+       stage('Approve Deployment'){
+           input{
+               message 'Do you want to proced for deployment ?'
+                   
+           }
+        steps{
+              bat 'echo "Deploying into server"'
+        }
+    }
+      post{
+          aborted {
+              echo 'Sending message to Agent'
+          }
+          failure{
+              echo 'Sending message to Agent'
+          }
+          success{
+              echo 'Sending message to Agent'
+          }
+      }
      
   }
 }
