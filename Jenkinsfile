@@ -29,6 +29,7 @@ pipeline{
               bat 'echo "Deploying into server"'
         }
     }
+       }
       post{
           aborted {
               echo 'Sending message to Agent'
@@ -41,5 +42,5 @@ pipeline{
           }
       }
      
-  }
+ 
 }
