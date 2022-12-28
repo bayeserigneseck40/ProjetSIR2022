@@ -25,6 +25,15 @@ public class PersonneRepositoryTest {
     assertNotNull(personne);
     assertEquals(personne.getNom(), "tonux");
   }
+  
+  @Test
+  public void findbyNom(){
+
+    List<Personne> person = personneRepository.findByNom("Abdel");
+    assertNotNull(person);
+    assertNotEquals(0, person.size());
+  }
+
 
   // TODO: ajouter un test sur les autres methodes comme delete, findByNom, etc...
   
