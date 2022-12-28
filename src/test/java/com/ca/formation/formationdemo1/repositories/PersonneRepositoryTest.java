@@ -33,7 +33,7 @@ public class PersonneRepositoryTest {
     //Given
     Personne pers = personneRepository.save(new Personne("malcom", "mbaye", 12));
     //When
-      Personne person = personneRepository.findById(pers.getId());
+      Optional<Personne> person = personneRepository.findById(pers.getId());
     //Then
     assertNotNull(person);
     assertEquals("malcom", person.get().getNom());
