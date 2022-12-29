@@ -8,6 +8,7 @@ class FormationDemo1ApplicationTests {
 
     @Test
     void contextLoads() {
+        assertThat(context).isNotNull();
     }
 
 }
