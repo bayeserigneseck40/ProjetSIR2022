@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PersonneRepository extends CrudRepository<Personne, Long> {
 
@@ -20,4 +21,5 @@ public interface PersonneRepository extends CrudRepository<Personne, Long> {
 
     List<Personne> ageGreaterThan(int age);
 
+    Optional<Personne> findByPrenom(String prenom);
 }

@@ -14,7 +14,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
-public class PersonneServiceImplTest {
+public class  PersonneServiceImplTest {
 
   @Mock
   PersonneRepository personneRepository;
