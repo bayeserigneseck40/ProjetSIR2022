@@ -9,33 +9,33 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
-public class  PersonneServiceImplTest {
-
+public class PersonneServiceImplTest {
 
   @Mock
   PersonneRepository personneRepository;
 
   @InjectMocks
   private PersonneServiceImpl personneServiceImpl;
+
   Personne personne;
+
   @Before
   public void setUp() throws Exception {
-     personne = new Personne("tonux", "samb", 50);
+    personne = new Personne("tonux", "samb", 50);
     personne.setId(1L);
     when(personneRepository.save(any())).thenReturn(personne);
 
@@ -43,15 +43,19 @@ public class  PersonneServiceImplTest {
 
   @Test
   public void ajouterPersonne() {
+    Personne personne = new Personne("tonux", "samb", 50);
+    personne.setId(1L);
+    when(personneRepository.save(any())).thenReturn(personne);
 
-
-    Personne personneResponse =
-            personneServiceImpl.addPersonne(new Personne("tonux", "samb", 50));
+    Personne personneResponse = personneServiceImpl.addPersonne(new Personne("tonux", "samb", 50));
 
     assertNotNull(personneResponse);
 
     verify(personneRepository, atLeastOnce()).save(any());
   }
+
+  // TODO: ajouter les autres tests sur methodes
+
 
   @Test
   public void updatePersonne() throws ResourceNotFoundException {
@@ -72,19 +76,19 @@ public class  PersonneServiceImplTest {
     personneServiceImpl.deletePersonne(personne.getId());
     verify(personneRepository).deleteById(personne.getId());
   }
-    @Test
-    public void getPerson() throws ResourceNotFoundException {
+  @Test
+  public void getPerson() throws ResourceNotFoundException {
 
-      when(personneRepository.findById(personne.getId())).thenReturn(Optional.of(personne));
+    when(personneRepository.findById(personne.getId())).thenReturn(Optional.of(personne));
 
-      Personne expected = personneServiceImpl.getPersonne(personne.getId());
+    Personne expected = personneServiceImpl.getPersonne(personne.getId());
 
 
-      assertEquals("tonux", expected.getNom());
-      assertEquals(1, expected.getId());
-      assertThat(expected).isSameAs(personne);
-      verify(personneRepository).findById(personne.getId());
-    }
+    assertEquals("tonux", expected.getNom());
+    assertEquals(1, expected.getId());
+    assertThat(expected).isSameAs(personne);
+    verify(personneRepository).findById(personne.getId());
+  }
   @Test
   public void getAllPersons() {
     //Given
