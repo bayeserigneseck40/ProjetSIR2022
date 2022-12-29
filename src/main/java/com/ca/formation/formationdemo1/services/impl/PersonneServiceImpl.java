@@ -25,7 +25,8 @@ public class PersonneServiceImpl implements PersonneService {
 
     @Override
     public Personne getPersonne(Long id) throws ResourceNotFoundException {
-        return personneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Personne non trouvé "));
+        return personneRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Personne non trouvé "));
     }
 
     @Override
