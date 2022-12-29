@@ -152,5 +152,4 @@ public class PersonneControllerTest {
         String token = mvcResult.getResponse().getHeader(HttpHeaders.AUTHORIZATION);
         tokenRequest = token;
     }
-
 }
