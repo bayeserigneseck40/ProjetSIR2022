@@ -89,7 +89,7 @@ public class PersonneRepositoryTest {
 
     Personne person1 = null;
 
-    Optional<Personne> person2 = personneRepository.findByPrenom(person.getPrenom());
+    Optional<Personne> person2 = personneRepository.findById(person.getId());
 
     if (person2.isPresent()){
       person1 = person2.get();
