@@ -45,6 +45,21 @@ public class PersonneControllerTest {
     }
 
     private String tokenRequest;
+       @Test
+    @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = { "READ" })
+    public void helloTest() {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest);
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+
+        ResponseEntity<String> response = this.restTemplate.exchange("http://localhost:" + port + "/api/v2/personnes/hello",
+                HttpMethod.GET, entity, String.class);
+        assertNotNull(response);
+
+
+    }
+
     @Test
     @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = { "READ" })
     public void helloTest() {
