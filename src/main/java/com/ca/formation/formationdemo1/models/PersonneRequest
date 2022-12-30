@@ -10,6 +10,9 @@ public class PersonneRequest {
     public String getPrenom() {
         return prenom;
     }
+    public String getNom() {
+        return nom;
+    }
      public int getAge() {
         return age;
     }
