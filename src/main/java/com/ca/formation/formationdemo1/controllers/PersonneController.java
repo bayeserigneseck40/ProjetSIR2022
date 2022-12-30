@@ -17,8 +17,8 @@ public class PersonneController {
 
     @GetMapping
     public String getPersonnes(Model model){
-        model.addAttribute("personnes", repository.findAll());
-        return "index";
+         model.addAttribute("personnes", repository.findAll());
+         return "index";
     }
 
     @GetMapping("/nouveau")
