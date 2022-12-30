@@ -4,7 +4,7 @@ import com.ca.formation.formationdemo1.models.Personne;
 import com.ca.formation.formationdemo1.repositories.PersonneRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import com.ca.formation.formationdemo1.PersonneRequest;
+import com.ca.formation.formationdemo1.models.PersonneRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
