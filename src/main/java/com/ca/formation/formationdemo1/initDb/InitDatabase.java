@@ -20,14 +20,13 @@ public class InitDatabase implements ApplicationListener<ApplicationReadyEvent> 
 
   @Override
   public void onApplicationEvent(ApplicationReadyEvent event) {
-    try {
-      // creer utilisateur
+   try {
       utilisateurService
           .registration(new Utilisateur("michel@formation.sn", "Passer@123", "Michel", Set.of(new Role(Role.READ))));
-      utilisateurService
+    utilisateurService
           .registration(new Utilisateur("clara@formation.sn", "Passer@123", "Clara", Set.of(new Role(Role.ADMIN))));
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (ValidationException e) {
+      throw new RuntimeException(e);
     }
   }
 }
