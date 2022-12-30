@@ -152,4 +152,15 @@ public class PersonneControllerTest {
         String token = mvcResult.getResponse().getHeader(HttpHeaders.AUTHORIZATION);
         tokenRequest = token;
     }
+    
+       @Test
+    public void ajouterPersonne_() throws Exception {
+        Personne personne = new Personne("tonux", "samb", 40);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest);
+        HttpEntity<Personne> entity = new HttpEntity<Personne>(null, headers);
+        ResponseEntity<Personne> responseEntity = restTemplate
+                .exchange("http://localhost:" + port + "/ajouterPersonne", HttpMethod.POST, entity, Personne.class, personne);
+        assertNotNull(responseEntity);
+    }
 }
