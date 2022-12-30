@@ -154,7 +154,7 @@ public class PersonneControllerTest {
     }
     
        @Test
-    public void ajouterPersonne_() throws Exception {
+    public void ajouterPerson_() throws Exception {
         Personne personne = new Personne("tonux", "samb", 40);
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest);
