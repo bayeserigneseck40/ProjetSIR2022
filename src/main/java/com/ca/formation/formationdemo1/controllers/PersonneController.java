@@ -30,7 +30,7 @@ public class PersonneController {
 
     @PostMapping("/ajouterPersonne")
     public String ajouterPersonne(PersonneRequest personne){
-           Personne pers = new Personne();
+        Personne pers = new Personne();
         pers.setNom(personne.getNom());
         pers.setPrenom(personne.getPrenom());
         pers.setAge(personne.getAge());
