@@ -164,4 +164,14 @@ public class PersonneControllerTest {
                 .exchange("http://localhost:" + port + "/ajouterPersonne", HttpMethod.POST, entity, Personne.class, personne);
         assertNotNull(responseEntity);
     }
+     @Test
+    public void registration_() throws Exception {
+        Utilisateur personne = new Utilisateur("bayeserigneseck@gmail.com", "passer123","baye serigne", Set.of(new Role(Role.READ)));
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest);
+        HttpEntity<Personne> entity = new HttpEntity<Personne>(null, headers);
+        ResponseEntity<Personne> responseEntity = restTemplate
+                .exchange( "http://localhost:" + port + "/api/v2/auth/registration", HttpMethod.POST, entity, Personne.class, personne);
+        assertNotNull(responseEntity);
+    }
 }
