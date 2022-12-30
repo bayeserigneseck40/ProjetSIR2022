@@ -1,8 +1,6 @@
 package com.ca.formation.formationdemo1.controllers;
-
 import com.ca.formation.formationdemo1.models.Personne;
 import com.ca.formation.formationdemo1.models.PersonneRequest;
-
 import com.ca.formation.formationdemo1.repositories.PersonneRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
