@@ -59,12 +59,12 @@ public class  PersonneServiceImplTest {
     personne.setNom("moustapha");
     given(personneRepository.findById(personne.getId())).willReturn(Optional.of(personne));
     personneServiceImpl.updatePersonne(personne.getId(), personne);
-
-    verify(personneRepository).save(personne);
-    assertEquals("moustapha",personne.getNom());
-    assertEquals(1,personne.getId());
-    verify(personneRepository,atLeastOnce()).save(any());
-  }
+    if(Optional.of(personne).isEmpty()){
+      verify(personneRepository).save(personne);
+      assertEquals("moustapha",personne.getNom());
+      assertEquals(1,personne.getId());
+      verify(personneRepository,atLeastOnce()).save(any());
+    }
   @Test
   public void deletePerson() {
     when(personneRepository.findById(personne.getId())).thenReturn(Optional.of(personne));
