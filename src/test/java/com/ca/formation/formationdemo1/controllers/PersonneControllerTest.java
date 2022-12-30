@@ -2,6 +2,7 @@ package com.ca.formation.formationdemo1.controllers;
 
 import com.ca.formation.formationdemo1.models.Personne;
 import com.ca.formation.formationdemo1.services.PersonneService;
+import com.ca.formation.formationdemo1.models.Utilisateur;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
