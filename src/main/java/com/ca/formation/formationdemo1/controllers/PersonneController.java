@@ -4,6 +4,7 @@ import com.ca.formation.formationdemo1.models.Personne;
 import com.ca.formation.formationdemo1.repositories.PersonneRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import com.ca.formation.formationdemo1.PersonneRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -28,7 +29,11 @@ public class PersonneController {
     }
 
     @PostMapping("/ajouterPersonne")
-    public String ajouterPersonne(Personne personne){
+    public String ajouterPersonne(PersonneRequest personne){
+           Personne pers = new Personne();
+        pers.setNom(personne.getNom());
+        pers.setPrenom(personne.getPrenom());
+        pers.setAge(personne.getAge());
         repository.save(personne);
         return "redirect:/";
 
