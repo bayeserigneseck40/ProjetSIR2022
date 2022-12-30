@@ -6,6 +6,7 @@ import com.ca.formation.formationdemo1.services.UtilisateurService;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
+import javax.xml.bind.ValidationException;
 
 import java.util.Set;
 
