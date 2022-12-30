@@ -177,4 +177,17 @@ public class PersonneControllerTest {
                 .exchange( "http://localhost:" + port + "/api/v2/auth/registration", HttpMethod.POST, entity, Personne.class, personne);
         assertNotNull(responseEntity);
     }
+    
+    
+    @Test
+    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
+    public void samaTest() throws Exception {
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .get("/api/v2/personnes/bye")
+                .header(HttpHeaders.AUTHORIZATION, "Bearer token")
+                .contentType(MediaType.APPLICATION_JSON);
+        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
+        MockHttpServletResponse response = mvcResult.getResponse();
+        assertEquals(HttpStatus.OK.value(), response.getStatus());
+    }
 }
