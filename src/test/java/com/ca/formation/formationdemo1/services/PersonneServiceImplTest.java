@@ -101,6 +101,24 @@ public class  PersonneServiceImplTest {
     verify(personneRepository, atLeastOnce()).findAll();
   }
    @Test
+  public void addPersonne(){
+    // given - precondition or setup
+    given(personneRepository.findById(personne.getId()))
+            .willReturn(Optional.empty());
+
+    given(personneRepository.save(personne)).willReturn(personne);
+
+    System.out.println(personneRepository);
+    System.out.println(personneServiceImpl);
+
+    // when -  action or the behaviour that we are going test
+    Personne savedPersonne = personneServiceImpl.addPersonne(personne);
+
+    System.out.println(savedPersonne);
+    // then - verify the output
+    assertThat(savedPersonne).isNotNull();
+  }
+   @Test
   public void getPersonneParNom() {
     String nom="seck";
     //Given
