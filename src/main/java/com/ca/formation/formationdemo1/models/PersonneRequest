@@ -1,0 +1,16 @@
+package com.ca.formation.formationdemo1.pojo;
+
+public class PersonneRequest {
+    private String nom;
+
+    private String prenom;
+
+    private int age;
+
+    public String getPrenom() {
+        return prenom;
+    }
+     public int getAge() {
+        return age;
+    }
+}
