@@ -99,4 +99,18 @@ public class  PersonneServiceImplTest {
     assertEquals(3, personList.size());
     verify(personneRepository, atLeastOnce()).findAll();
   }
+   @Test
+  public void getPersonneParNom() {
+    String nom="seck";
+    //Given
+    List<Personne> list = new ArrayList<Personne>();
+    list.add(new Personne("tonux","samb",50));
+    list.add(new Personne("tonux","mbacke",23));
+    list.add(new Personne("baye","seck",24));
+    when(personneRepository.findAll()).thenReturn(list);
+    //When
+    List<Personne> personList = personneServiceImpl.getPersonneParNom("tonux");
+    //Then
+    assertEquals(0, personList.size());
+    verify(personneRepository, atLeastOnce()).findByNom("tonux");
 }
