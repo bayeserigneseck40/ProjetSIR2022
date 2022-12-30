@@ -65,6 +65,7 @@ public class  PersonneServiceImplTest {
       assertEquals(1,personne.getId());
       verify(personneRepository,atLeastOnce()).save(any());
     }
+  }
   @Test
   public void deletePerson() {
     when(personneRepository.findById(personne.getId())).thenReturn(Optional.of(personne));
