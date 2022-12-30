@@ -1,4 +1,4 @@
-package com.ca.formation.formationdemo1.pojo;
+package com.ca.formation.formationdemo1.models;
 
 public class PersonneRequest {
     private String nom;
