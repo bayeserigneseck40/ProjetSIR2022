@@ -247,5 +247,17 @@ public class PersonneControllerTest {
         assertNotNull(contentAsString);
 
     }
+    @Test
+    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"READ"})
+    public void nouveauPersonne() throws Exception {
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .get("/nouveau")
+                .header(HttpHeaders.AUTHORIZATION, "Bearer token")
+                .contentType(MediaType.APPLICATION_JSON);
+        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
+          String response = mvcResult.getResponse().getContentAsString();
+          System.out.println(response);
+        assertEquals("nouveau",response);
+    }
   
 }
