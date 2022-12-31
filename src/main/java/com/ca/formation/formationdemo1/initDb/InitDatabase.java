@@ -27,7 +27,7 @@ public class InitDatabase implements ApplicationListener<ApplicationReadyEvent> 
     utilisateurService
           .registration(new Utilisateur("clara@formation.sn", "Passer@123", "Clara", Set.of(new Role(Role.ADMIN))));
     } catch (ValidationException e) {
-      throw new RuntimeException(e);
+      System.err.println(e.getMessage());
     }
   }
 }
