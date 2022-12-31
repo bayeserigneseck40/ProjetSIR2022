@@ -87,7 +87,6 @@ public class PersonneControllerTest {
 
     }
     @Test
-    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"READ"})
     public void nouveauPersonne() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .get("/nouveau")
@@ -96,6 +95,17 @@ public class PersonneControllerTest {
         MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
           String response = mvcResult.getResponse().getContentAsString();
         assertEquals("nouveau",response);
+    }
+    @Test
+    public void registration_() throws Exception {
+        Personne personne = new Personne("seck","baye serigne", 24);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest);
+        HttpEntity<Personne> entity = new HttpEntity<>(null, headers);
+        ResponseEntity<String> responseEntity = restTemplate
+                .exchange( "http://localhost:" + port + "/ajouterPersonne", HttpMethod.POST, entity,String.class, personne);
+       System.out.println(responseEntity);
+        assertNotNull(responseEntity);
     }
 
     @Test
@@ -178,16 +188,7 @@ public class PersonneControllerTest {
                 .exchange("http://localhost:" + port + "/ajouterPersonne", HttpMethod.POST, entity, Personne.class, personne);
         assertNotNull(responseEntity);
     }
-     @Test
-    public void registration_() throws Exception {
-        Utilisateur personne = new Utilisateur("bayeserigneseck@gmail.com", "passer123","baye serigne", Set.of(new Role(Role.READ)));
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest);
-        HttpEntity<Personne> entity = new HttpEntity<Personne>(null, headers);
-        ResponseEntity<Personne> responseEntity = restTemplate
-                .exchange( "http://localhost:" + port + "/api/v2/auth/registration", HttpMethod.POST, entity, Personne.class, personne);
-        assertNotNull(responseEntity);
-    }
+ 
     
     
     @Test
@@ -242,22 +243,7 @@ public class PersonneControllerTest {
         assertNotNull(contentAsString);
 
     }
-    @Test
-    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
-    public void modifPersonne() throws Exception {
-        int id=2;
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .patch("/api/v2/personnnes/" + id)
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest)
-                .contentType(MediaType.APPLICATION_JSON);
 
-        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
-        String contentAsString = mvcResult.getResponse().getContentAsString();
-
-        System.out.println(contentAsString);
-        assertNotNull(contentAsString);
-
-    }
   
   
 }
