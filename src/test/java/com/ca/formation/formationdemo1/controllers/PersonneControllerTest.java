@@ -87,6 +87,7 @@ public class PersonneControllerTest {
 
     }
     @Test
+      @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
     public void nouveauPersonne() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .get("/nouveau")
@@ -97,6 +98,7 @@ public class PersonneControllerTest {
         assertEquals("nouveau",response);
     }
     @Test
+    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
     public void registration_() throws Exception {
         Personne personne = new Personne("seck","baye serigne", 24);
         HttpHeaders headers = new HttpHeaders();
