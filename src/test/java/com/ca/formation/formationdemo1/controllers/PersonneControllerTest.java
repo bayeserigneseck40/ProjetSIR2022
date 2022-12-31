@@ -231,5 +231,21 @@ public class PersonneControllerTest {
         assertNotNull(contentAsString);
 
     }
+     @Test
+    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
+    public void modifPersonne() throws Exception {
+        int id=2;
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .patch("/api/v2/personnnes/" + id)
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest)
+                .contentType(MediaType.APPLICATION_JSON);
+
+        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
+        String contentAsString = mvcResult.getResponse().getContentAsString();
+
+        System.out.println(contentAsString);
+        assertNotNull(contentAsString);
+
+    }
   
 }
