@@ -2,6 +2,7 @@ package com.ca.formation.formationdemo1.controllers;
 
 import com.ca.formation.formationdemo1.models.Personne;
 import com.ca.formation.formationdemo1.services.PersonneService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +22,11 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -151,5 +157,48 @@ public class PersonneControllerTest {
         MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
         String token = mvcResult.getResponse().getHeader(HttpHeaders.AUTHORIZATION);
         tokenRequest = token;
+    }
+
+    @Test
+    public void updatePersonne() throws Exception {
+        Personne personne = new Personne("tonux", "samb", 40);
+        personne.setId(1L);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest);
+        HttpEntity<Personne> entity = new HttpEntity<Personne>(null, headers);
+        ResponseEntity<Personne> responseEntity = restTemplate
+                .exchange(getRootUrl() + "/personnes/1", HttpMethod.PUT, entity, Personne.class, personne);
+        assertNotNull(responseEntity);
+    }
+    @Test
+    public void deletePersonne() throws Exception {
+        Personne person = new Personne("tonux", "samb", 40);
+        person.setId(1L);
+        given(personneService.getPersonne(person.getId())).willReturn(person);
+        doNothing().when(personneService).deletePersonne(person.getId());
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .delete("/api/v2/personnes/{id}",person.getId())
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest)
+                .contentType(MediaType.APPLICATION_JSON);
+
+        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
+        String contentAsString = mvcResult.getResponse().getContentAsString();
+
+        System.out.println(contentAsString);
+        assertNotNull(contentAsString);
+    }
+
+    @Test
+    public void getPersonneParNom() throws Exception{
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .get("/api/v2/personnes/search?nom=Abdel")
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest)
+                .contentType(MediaType.APPLICATION_JSON);
+
+        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
+        String contentAsString = mvcResult.getResponse().getContentAsString();
+
+        System.out.println(contentAsString);
+        assertNotNull(contentAsString);
     }
 }
