@@ -27,10 +27,8 @@ public class UtilisateurController {
 
     @PostMapping("/login")
     public ResponseEntity<Utilisateur> login(@RequestBody Utilisateur utilisateurRequest){
-    
-                ,utilisateurRequest.getName(),utilisateurRequest.getAuthoritie());
         try{
-            Utilisateur utilisateur = utilisateurService.login( utilisateurRequest);
+            Utilisateur utilisateur = utilisateurService.login(utilisateurRequest);
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.AUTHORIZATION, jwtUtil.generateAccesToken(utilisateur))
@@ -39,6 +37,8 @@ public class UtilisateurController {
         } catch (BadCredentialsException e){
           return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+
+    }
 
     }
 
