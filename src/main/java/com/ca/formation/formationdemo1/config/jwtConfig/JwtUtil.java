@@ -5,7 +5,6 @@ import com.ca.formation.formationdemo1.models.Utilisateur;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
@@ -16,8 +15,8 @@ import java.util.stream.Collectors;
 public class JwtUtil {
 
     // mettre le jwtSecret= "Base-64"
-    @Value("${bayembacke.app.jwtSecret}")
-    private  String jwtSecret;
+    private final String jwtSecret="TWV0dHJlIG1vbiB0b2tlbiBlbiBiYXNlIDY0IA==";
+
     // generer JWT
 
     Logger logger= LoggerFactory.getLogger(JwtUtil.class);
