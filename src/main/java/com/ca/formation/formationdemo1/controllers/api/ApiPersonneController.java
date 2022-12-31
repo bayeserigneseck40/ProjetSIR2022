@@ -61,7 +61,7 @@ public class ApiPersonneController {
 
     @PostMapping
     public ResponseEntity<Personne> addPersonne(@RequestBody Personne personne){
-        Personne personneResponse = personneService.addPersonne(personnee);
+        Personne personneResponse = personneService.addPersonne(personne);
         return ResponseEntity.ok().body(personne);
     }
 
