@@ -231,20 +231,5 @@ public class PersonneControllerTest {
         assertNotNull(contentAsString);
 
     }
- @Test
-    public void ajouterPersonne() throws Exception {
-        String body = "{\n" +
-                "    \"username\": \"bayeserigneseck\",\n" +
-                "    \"password\": \"Passer@123\"\n" +
-                "    \"authorities\": \"READ\"\n" +
-                "}";
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .post("/api/v2/auth/registration")
-                .content(body)
-                .contentType(MediaType.APPLICATION_JSON);
-        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
-        String token = mvcResult.getResponse().getHeader(HttpHeaders.AUTHORIZATION);
-        tokenRequest = token;
-    }
   
 }
