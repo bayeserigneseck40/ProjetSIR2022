@@ -59,11 +59,12 @@ public class  PersonneServiceImplTest {
     personne.setNom("moustapha");
     given(personneRepository.findById(personne.getId())).willReturn(Optional.of(personne));
     personneServiceImpl.updatePersonne(personne.getId(), personne);
-
-    verify(personneRepository).save(personne);
-    assertEquals("moustapha",personne.getNom());
-    assertEquals(1,personne.getId());
-    verify(personneRepository,atLeastOnce()).save(any());
+    if(Optional.of(personne).isEmpty()){
+      verify(personneRepository).save(personne);
+      assertEquals("moustapha",personne.getNom());
+      assertEquals(1,personne.getId());
+      verify(personneRepository,atLeastOnce()).save(any());
+    }
   }
   @Test
   public void deletePerson() {
@@ -99,4 +100,37 @@ public class  PersonneServiceImplTest {
     assertEquals(3, personList.size());
     verify(personneRepository, atLeastOnce()).findAll();
   }
+   @Test
+  public void addPersonne(){
+    // given - precondition or setup
+    given(personneRepository.findById(personne.getId()))
+            .willReturn(Optional.empty());
+
+    given(personneRepository.save(personne)).willReturn(personne);
+
+    System.out.println(personneRepository);
+    System.out.println(personneServiceImpl);
+
+    // when -  action or the behaviour that we are going test
+    Personne savedPersonne = personneServiceImpl.addPersonne(personne);
+
+    System.out.println(savedPersonne);
+    // then - verify the output
+    assertThat(savedPersonne).isNotNull();
+  }
+   @Test
+  public void getPersonneParNom() {
+    String nom="seck";
+    //Given
+    List<Personne> list = new ArrayList<Personne>();
+    list.add(new Personne("tonux","samb",50));
+    list.add(new Personne("tonux","mbacke",23));
+    list.add(new Personne("baye","seck",24));
+    when(personneRepository.findAll()).thenReturn(list);
+    //When
+    List<Personne> personList = personneServiceImpl.getPersonneParNom("tonux");
+    //Then
+    assertEquals(0, personList.size());
+    verify(personneRepository, atLeastOnce()).findByNom("tonux");
+}
 }

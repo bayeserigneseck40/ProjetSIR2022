@@ -1,5 +1,4 @@
 package com.ca.formation.formationdemo1.controllers;
-
 import com.ca.formation.formationdemo1.models.Personne;
 import com.ca.formation.formationdemo1.repositories.PersonneRepository;
 import org.springframework.stereotype.Controller;
@@ -18,17 +17,18 @@ public class PersonneController {
 
     @GetMapping
     public String getPersonnes(Model model){
-        model.addAttribute("personnes", repository.findAll());
-        return "index";
+         model.addAttribute("personnes", repository.findAll());
+         return "index";
     }
 
     @GetMapping("/nouveau")
-    public String nouveauPersonne(){
+    public String nouveauPersonne(Personne personne){
         return "nouveau";
     }
 
     @PostMapping("/ajouterPersonne")
-    public String ajouterPersonne(Personne personne){
+    public String ajouterPersonne(Personne personne, Model model){
+ 
         repository.save(personne);
         return "redirect:/";
 
