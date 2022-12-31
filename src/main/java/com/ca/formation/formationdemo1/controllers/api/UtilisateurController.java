@@ -38,12 +38,12 @@ public class UtilisateurController {
           return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-    }
 
     }
 
     @PostMapping("/registration")
     public ResponseEntity<Utilisateur> registration(@RequestBody Utilisateur utilisateurRequest){
+
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
