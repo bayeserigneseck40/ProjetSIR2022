@@ -246,5 +246,14 @@ public class PersonneControllerTest {
         String token = mvcResult.getResponse().getHeader(HttpHeaders.AUTHORIZATION);
         tokenRequest = token;
     }
-  
+    @Test
+    public void register() throws Exception {
+       Utilisateur util = new Utilisateur("bayeserigneseck@gmail.com", "passer@123", "bayeserigne", Set.of(new Role(Role.READ)));
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<Utilisateur> entity = new HttpEntity<Utilisateur>(null, headers);
+        ResponseEntity<Utilisateur> responseEntity = restTemplate
+                .exchange("http://localhost:" + port +  "/api/v2/auth/registration", HttpMethod.POST, entity, Utilisateur.class, util);
+       System.out.println(responseEntity);
+        assertNotNull(responseEntity);
+    }
 }
