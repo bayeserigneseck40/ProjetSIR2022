@@ -248,7 +248,7 @@ public class PersonneControllerTest{
             throw new RuntimeException(e);
         }
     }
- @Test
+    @Test
     @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
     public void getAllPersonneAPI() throws Exception
     {
