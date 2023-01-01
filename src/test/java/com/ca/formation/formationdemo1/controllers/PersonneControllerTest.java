@@ -293,4 +293,18 @@ public class PersonneControllerTest{
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+     @Test
+    @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = {"READ"})
+    public void loginAPI() throws Exception
+    {
+       Utilisateur u= new Utilisateur();
+       u.setUsername("michel@formation.sn");
+       u.setPassword("Passer@123");
+        mockMvc.perform( MockMvcRequestBuilders
+                        .post("/api/v2/auth/login")
+                        .content(asJsonString(u))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 }
