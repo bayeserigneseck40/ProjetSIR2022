@@ -47,7 +47,7 @@ public class PersonneServiceImpl implements PersonneService {
     }
 
     @Override
-    public Personne addPersonne(PersonneDTO personne) {
+    public Personne addPersonne(Personne personne) {
     
         return personneRepository.save(personne);
     }
