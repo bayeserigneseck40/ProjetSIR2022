@@ -248,6 +248,17 @@ public class PersonneControllerTest{
             throw new RuntimeException(e);
         }
     }
-
+ @Test
+    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
+    public void getAllPersonneAPI() throws Exception
+    {
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/all")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+                //.andExpect(MockMvcResultMatchers.jsonPath("$.employees").exists())
+                //.andExpect(MockMvcResultMatchers.jsonPath("$.employees[*].employeeId").isNotEmpty());
+    }
   
 }
