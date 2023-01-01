@@ -2,7 +2,6 @@ package com.ca.formation.formationdemo1.services;
 
 import com.ca.formation.formationdemo1.exception.ResourceNotFoundException;
 import com.ca.formation.formationdemo1.models.Personne;
-import com.ca.formation.formationdemo1.models.PersonneDTO;
 
 import java.util.List;
 
@@ -12,9 +11,9 @@ public interface PersonneService {
 
     Personne getPersonne(Long id) throws ResourceNotFoundException;
 
-    Personne updatePersonne(Long id, PersonneDTO personne) throws ResourceNotFoundException ;
+    Personne updatePersonne(Long id, Personne personne) throws ResourceNotFoundException ;
 
-    Personne addPersonne(PersonneDTO personne);
+    Personne addPersonne(Personne personne);
 
     void deletePersonne(Long id);
 
