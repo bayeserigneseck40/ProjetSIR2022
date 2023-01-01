@@ -2,6 +2,7 @@ package com.ca.formation.formationdemo1.controllers.api;
 
 import com.ca.formation.formationdemo1.exception.ResourceNotFoundException;
 import com.ca.formation.formationdemo1.models.Personne;
+import com.ca.formation.formationdemo1.models.PersonneDTO;
 import com.ca.formation.formationdemo1.models.Role;
 import com.ca.formation.formationdemo1.services.PersonneService;
 import org.springframework.http.ResponseEntity;
@@ -56,20 +57,18 @@ public class ApiPersonneController {
     @GetMapping("/{id}")
     public ResponseEntity<Personne> getPersonne(@PathVariable(value="id") Long id) throws ResourceNotFoundException {
         Personne personne = personneService.getPersonne(id);
-       return ResponseEntity.ok().body(personne);
-    }
-
-    @PostMapping
-    public ResponseEntity<Personne> addPersonne(@RequestBody Personne personne){
-        Personne personneResponse = personneService.addPersonne(personne);
         return ResponseEntity.ok().body(personne);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Personne> updatePersonne(@PathVariable(value="id") Long id, @RequestBody Personne personneRequest ) throws Exception {
-     
+    @PostMapping
+    public ResponseEntity<Personne> addPersonne(@RequestBody PersonneDTO personne){
+        Personne personneResponse = personneService.addPersonne(personne);
+        return ResponseEntity.ok().body(personneResponse);
+    }
 
-        Personne personne = personneService.updatePersonne(id, personneRequest);
+    @PatchMapping("/{id}")
+    public ResponseEntity<Personne> updatePersonne(@PathVariable(value="id") Long id, @RequestBody PersonneDTO personneRequest ) throws Exception {
+        Personne personne = personneService.updatePersonne(id,personneRequest);
 
         return ResponseEntity.ok().body(personne);
     }
