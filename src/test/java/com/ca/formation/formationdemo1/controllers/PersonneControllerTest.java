@@ -20,6 +20,7 @@ import org.springframework.http.*;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
+import com.ca.formation.formationdemo1.models.PersonneDTO;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -115,8 +116,8 @@ public class PersonneControllerTest{
         headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest);
         HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 
-        ResponseEntity<Personne> responseEntity = restTemplate.exchange(getRootUrl() + "/personnes/3", HttpMethod.GET,
-                entity, Personne.class);
+        ResponseEntity<PersonneDTO> responseEntity = restTemplate.exchange(getRootUrl() + "/personnes/3", HttpMethod.GET,
+                entity, PersonneDTO.class);
 
         assertNotNull(responseEntity);
         // assertEquals(personne.getNom(), "Abdel");
