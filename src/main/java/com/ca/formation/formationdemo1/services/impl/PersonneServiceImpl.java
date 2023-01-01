@@ -31,7 +31,7 @@ public class PersonneServiceImpl implements PersonneService {
     }
 
     @Override
-    public Personne updatePersonne(Long id, Personne personneRequest) throws ResourceNotFoundException  {
+    public Personne updatePersonne(Long id, PersonneDTO personneRequest) throws ResourceNotFoundException  {
         Optional<Personne> optionalPersonne = personneRepository.findById(id);
         if(optionalPersonne.isEmpty()){
             throw new ResourceNotFoundException("Mise à jour impossible ");
