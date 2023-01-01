@@ -5,7 +5,6 @@ import com.ca.formation.formationdemo1.models.Personne;
 import com.ca.formation.formationdemo1.repositories.PersonneRepository;
 import com.ca.formation.formationdemo1.services.PersonneService;
 import org.springframework.stereotype.Service;
-import com.ca.formation.formationdemo1.models.PersonneDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +30,7 @@ public class PersonneServiceImpl implements PersonneService {
     }
 
     @Override
-    public Personne updatePersonne(Long id, PersonneDTO personneRequest) throws ResourceNotFoundException  {
+    public Personne updatePersonne(Long id, Personne personneRequest) throws ResourceNotFoundException  {
         Optional<Personne> optionalPersonne = personneRepository.findById(id);
         if(optionalPersonne.isEmpty()){
             throw new ResourceNotFoundException("Mise à jour impossible ");
@@ -49,11 +48,8 @@ public class PersonneServiceImpl implements PersonneService {
 
     @Override
     public Personne addPersonne(PersonneDTO personne) {
-        Personne p =new Personne();
-        p.setNom(personne.getNom());
-        p.setPrenom(personne.getPrenom());
-        p.setAge(personne.getAge());
-        return personneRepository.save(p);
+    
+        return personneRepository.save(personne);
     }
 
     @Override
