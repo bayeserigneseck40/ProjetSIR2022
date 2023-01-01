@@ -282,4 +282,15 @@ public class PersonneControllerTest{
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+     @Test
+    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
+    public void updatePersonneAPI() throws Exception
+    {
+        mockMvc.perform( MockMvcRequestBuilders
+                        .patch("/api/v2/personnes/{id}", 2)
+                        .content(asJsonString(new Personne("firstName2", "lastName2", 25)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 }
