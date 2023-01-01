@@ -1,10 +1,12 @@
 package com.ca.formation.formationdemo1.controllers;
 
-import com.ca.formation.formationdemo1.models.Personne;
-import com.ca.formation.formationdemo1.services.PersonneService;
 import com.ca.formation.formationdemo1.models.Utilisateur;
+import com.ca.formation.formationdemo1.models.Personne;
+
 import com.ca.formation.formationdemo1.models.Role;
-import java.util.Set;
+
+import com.ca.formation.formationdemo1.services.PersonneService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,10 +23,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+
+import java.util.Set;
 
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -234,17 +243,16 @@ public class PersonneControllerTest {
         assertNotNull(contentAsString);
 
     }
- @Test
+    @Test
     @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
-    public void registration_() throws Exception {
-        Personne personne = new Personne("seck","baye serigne", 24);
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest);
-        HttpEntity<Personne> entity = new HttpEntity<>(null, headers);
-        ResponseEntity<String> responseEntity = restTemplate
-                .exchange( "http://localhost:" + port + "/ajouterPersonne", HttpMethod.POST, entity,String.class, personne);
-       System.out.println(responseEntity);
-        assertNotNull(responseEntity);
+    public void createPersonneAPI() throws Exception
+    {
+        mockMvc.perform( MockMvcRequestBuilders
+                        .post("/ajouterPersonne")
+                        .content(asJsonString(new Personne("firstName4", "lastName4", 30)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
   
   
