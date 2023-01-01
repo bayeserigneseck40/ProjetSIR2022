@@ -223,7 +223,18 @@ public class PersonneControllerTest {
         assertNotNull(contentAsString);
 
     }
-
+ @Test
+    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
+    public void registration_() throws Exception {
+        Personne personne = new Personne("seck","baye serigne", 24);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest);
+        HttpEntity<Personne> entity = new HttpEntity<>(null, headers);
+        ResponseEntity<String> responseEntity = restTemplate
+                .exchange( "http://localhost:" + port + "/ajouterPersonne", HttpMethod.POST, entity,String.class, personne);
+       System.out.println(responseEntity);
+        assertNotNull(responseEntity);
+    }
   
   
 }
