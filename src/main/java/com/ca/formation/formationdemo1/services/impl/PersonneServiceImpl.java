@@ -5,6 +5,7 @@ import com.ca.formation.formationdemo1.models.Personne;
 import com.ca.formation.formationdemo1.repositories.PersonneRepository;
 import com.ca.formation.formationdemo1.services.PersonneService;
 import org.springframework.stereotype.Service;
+import com.ca.formation.formationdemo1.models.PersonneDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,8 +48,12 @@ public class PersonneServiceImpl implements PersonneService {
     }
 
     @Override
-    public Personne addPersonne(Personne personne) {
-        return personneRepository.save(personne);
+    public Personne addPersonne(PersonneDTO personne) {
+        Personne p =new Personne();
+        p.setNom(personne.getNom());
+        p.setPrenom(personne.getPrenom());
+        p.setAge(personne.getAge());
+        return personneRepository.save(p);
     }
 
     @Override
