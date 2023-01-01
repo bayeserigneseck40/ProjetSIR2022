@@ -4,7 +4,7 @@ import com.ca.formation.formationdemo1.models.Utilisateur;
 import com.ca.formation.formationdemo1.models.Personne;
 
 import com.ca.formation.formationdemo1.models.Role;
-
+import com.ca.formation.formationdemo1.models.UtilisateurDTO;
 import com.ca.formation.formationdemo1.services.PersonneService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -260,5 +260,15 @@ public class PersonneControllerTest{
                 //.andExpect(MockMvcResultMatchers.jsonPath("$.employees").exists())
                 //.andExpect(MockMvcResultMatchers.jsonPath("$.employees[*].employeeId").isNotEmpty());
     }
-  
+   @Test
+    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
+    public void createUtilisateurAPI() throws Exception
+    {
+        mockMvc.perform( MockMvcRequestBuilders
+                        .post("/api/v2/auth/registration")
+                        .content(asJsonString(new UtilisateurDTO()))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 }
