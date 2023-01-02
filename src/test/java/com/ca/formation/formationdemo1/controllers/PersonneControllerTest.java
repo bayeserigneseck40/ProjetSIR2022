@@ -200,5 +200,34 @@ public class PersonneControllerTest{
     }
     
   
-  
+     @Test
+    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
+    public void deletePersonne() throws Exception {
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .delete("/api/v2/personnes/2")
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest)
+                .contentType(MediaType.APPLICATION_JSON);
+
+        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
+        String contentAsString = mvcResult.getResponse().getContentAsString();
+
+        System.out.println(contentAsString);
+        assertNotNull(contentAsString);
+
+    }
+    @Test
+    @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = {"READ"})
+    public void getPersonneParNom() throws Exception {
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .get("/api/v2/personnes/search?nom=Abdel")
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest)
+                .contentType(MediaType.APPLICATION_JSON);
+
+        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
+        String contentAsString = mvcResult.getResponse().getContentAsString();
+
+        System.out.println(contentAsString);
+        assertNotNull(contentAsString);
+
+    }
 }
