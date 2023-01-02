@@ -237,7 +237,7 @@ public class PersonneControllerTest{
     {
         mockMvc.perform( MockMvcRequestBuilders
                         .post("/ajouterPersonne")
-                        .content(asJsonString(new PersonneDTO("firstName4", "lastName4", 30)))
+                        .content(asJsonString(new PersonneDTO()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
