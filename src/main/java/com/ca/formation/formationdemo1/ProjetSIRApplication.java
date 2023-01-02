@@ -52,7 +52,6 @@ public class ProjetSIRApplication {
 
     });
   }
-
   @Bean
   public ClassLoaderTemplateResolver templateResolver() {
     ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
