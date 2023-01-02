@@ -243,7 +243,7 @@ public class PersonneControllerTest{
                 .andExpect(status().isOk());
     }
 
-   public static String asJsonString(final Object obj) {
+   public static String asJsonString(final Object obj){
         try {
             return new ObjectMapper().writeValueAsString(obj);
         } catch (Exception e) {
