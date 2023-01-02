@@ -1,4 +1,4 @@
-package com.ca.formation.formationdemo1.config.jwtConfig;
+package com.ca.formation.formationdemo1.config.jwtconfig;
 
 import com.ca.formation.formationdemo1.repositories.UtilisateurRepository;
 import org.springframework.http.HttpHeaders;

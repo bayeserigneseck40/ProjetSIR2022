@@ -27,7 +27,7 @@ public class PersonneRepositoryTest {
   public void ajouterPersonne() {
     Personne personne = personneRepository.save(new Personne("tonux", "samb", 50));
     assertNotNull(personne);
-    assertEquals(personne.getNom(), "tonux");
+    assertEquals("tonux",personne.getNom());
   }
 
   // TODO: ajouter un test sur les autres methodes comme delete, findByNom, etc...
@@ -75,7 +75,7 @@ public class PersonneRepositoryTest {
 
     List<Personne> personList = (List<Personne>) personneRepository.findAll();
 
-    Assertions.assertThat(personList.size()).isGreaterThan(0);
+    Assertions.assertThat(personList).hasSizeGreaterThanOrEqualTo(1);
   }
   @Test
   public void deletePerson(){
