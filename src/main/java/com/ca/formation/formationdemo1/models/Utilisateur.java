@@ -1,9 +1,11 @@
 package com.ca.formation.formationdemo1.models;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -54,17 +56,17 @@ public class Utilisateur implements UserDetails, Serializable {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return enabled;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return enabled;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return enabled;
     }
 
     public void setUsername(String username) {
@@ -72,7 +74,7 @@ public class Utilisateur implements UserDetails, Serializable {
     }
 
     @Override
-    public Set<Role> getAuthorities() {
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         return authoritie;
     }
 
