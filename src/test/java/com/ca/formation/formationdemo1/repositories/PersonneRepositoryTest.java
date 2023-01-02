@@ -29,7 +29,7 @@ public class PersonneRepositoryTest {
   public void ajouterPersonne() {
     Personne personne = personneRepository.save(new Personne("tonux", "samb", 50));
     assertNotNull(personne);
-    assertEquals(personne.getNom(), "tonux");
+    assertEquals( "tonux",personne.getNom());
   }
 
   // TODO: ajouter un test sur les autres methodes comme delete, findByNom, etc...
