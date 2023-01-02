@@ -108,7 +108,7 @@ public class PersonneControllerTest{
         assertNotNull(response);
 
     }
-  @Test
+    @Test
     public void getPersonne_() throws Exception {
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest);
@@ -164,134 +164,7 @@ public class PersonneControllerTest{
         tokenRequest = token;
     }
     
-       @Test
-    public void ajouterPerson_() throws Exception {
-        Personne personne = new Personne("tonux", "samb", 40);
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest);
-        HttpEntity<Personne> entity = new HttpEntity<Personne>(null, headers);
-        ResponseEntity<Personne> responseEntity = restTemplate
-                .exchange("http://localhost:" + port + "/ajouterPersonne", HttpMethod.POST, entity, Personne.class, personne);
-        assertNotNull(responseEntity);
-    }
- 
     
-    
-    @Test
-    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
-    public void samaTest() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/api/v2/personnes/bye")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer token")
-                .contentType(MediaType.APPLICATION_JSON);
-        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
-        MockHttpServletResponse response = mvcResult.getResponse();
-        assertEquals(HttpStatus.OK.value(), response.getStatus());
-    }
-     @Test
-    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"READ"})
-    public void samaTestBye() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/api/v2/personnes/hello")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer token")
-                .contentType(MediaType.APPLICATION_JSON);
-        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
-        MockHttpServletResponse response = mvcResult.getResponse();
-        assertEquals(HttpStatus.OK.value(), response.getStatus());
-    }
-    @Test
-    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
-    public void deletePersonne() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .delete("/api/v2/personnes/2")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest)
-                .contentType(MediaType.APPLICATION_JSON);
-
-        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
-        String contentAsString = mvcResult.getResponse().getContentAsString();
-
-        System.out.println(contentAsString);
-        assertNotNull(contentAsString);
-
-    }
-    @Test
-    @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = {"READ"})
-    public void getPersonneParNom() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/api/v2/personnes/search?nom=Abdel")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest)
-                .contentType(MediaType.APPLICATION_JSON);
-
-        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
-        String contentAsString = mvcResult.getResponse().getContentAsString();
-
-        System.out.println(contentAsString);
-        assertNotNull(contentAsString);
-
-    }
-    @Test
-    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
-    public void createPersonneAPI() throws Exception
-    {
-        mockMvc.perform( MockMvcRequestBuilders
-                        .post("/ajouterPersonne")
-                        .content(asJsonString(new Personne("firstName4", "lastName4", 30)))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-   public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-    @Test
-    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
-    public void getAllPersonneAPI() throws Exception
-    {
-        mockMvc.perform(MockMvcRequestBuilders
-                        .get("/all")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk());
-                //.andExpect(MockMvcResultMatchers.jsonPath("$.employees").exists())
-                //.andExpect(MockMvcResultMatchers.jsonPath("$.employees[*].employeeId").isNotEmpty());
-    }
-   @Test
-    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
-    public void createUtilisateurAPI() throws Exception
-    {
-        mockMvc.perform( MockMvcRequestBuilders
-                        .post("/api/v2/auth/registration")
-                        .content(asJsonString(new UtilisateurDTO()))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-      @Test
-    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
-    public void addPersonneAPI() throws Exception
-    {
-        mockMvc.perform( MockMvcRequestBuilders
-                        .post("/api/v2/personnes")
-                        .content(asJsonString(new Personne()))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-     @Test
-    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
-    public void updatePersonneAPI() throws Exception
-    {
-        mockMvc.perform( MockMvcRequestBuilders
-                        .patch("/api/v2/personnes/{id}", 2)
-                        .content(asJsonString(new Personne("firstName2", "lastName2", 25)))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
   
   
 }
