@@ -45,6 +45,7 @@ public class ProjetSIRApplication {
       Personne personne1 = repository.save(new Personne("Lacroix", "Jean", 20));
       repository.save(new Personne("Beau", "Michel", 30));
       repository.save(new Personne("Abdel", "Moussa", 40));
+      repository.save(new Personne("seck", "baye", 40));
 
       repository.delete(personne1);
 

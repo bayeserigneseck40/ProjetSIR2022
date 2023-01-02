@@ -2,6 +2,7 @@ package com.ca.formation.formationdemo1.services.impl;
 
 import com.ca.formation.formationdemo1.models.Role;
 import com.ca.formation.formationdemo1.models.Utilisateur;
+import com.ca.formation.formationdemo1.models.UtilisateurDTO;
 import com.ca.formation.formationdemo1.repositories.UtilisateurRepository;
 import com.ca.formation.formationdemo1.services.UtilisateurService;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -57,7 +57,7 @@ public class PersonneServiceImpl implements PersonneService {
 
     @Override
     public List<Personne> getPersonneParNom(String nom) {
-        return personneRepository.findByNom(nom);
+        return (List) personneRepository.findByNom(nom);
     }
 
 }

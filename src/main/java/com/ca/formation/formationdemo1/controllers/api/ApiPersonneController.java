@@ -34,7 +34,7 @@ public class ApiPersonneController {
     @PreAuthorize("hasAuthority('"+ Role.READ+"')")
     @GetMapping("/hello")
     public String hello(){
-        return "Bonjour tout le monde";
+        return "Bonjour";
     }
 
     @PreAuthorize("hasAuthority('"+ Role.ADMIN+"')")
@@ -84,5 +84,7 @@ public class ApiPersonneController {
         List<Personne> personnes = personneService.getPersonneParNom(nom);
         return ResponseEntity.ok().body(personnes);
     }
+
+
 
 }
