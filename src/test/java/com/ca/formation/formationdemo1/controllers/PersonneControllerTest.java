@@ -5,6 +5,7 @@ import com.ca.formation.formationdemo1.models.Personne;
 
 import com.ca.formation.formationdemo1.models.Role;
 import com.ca.formation.formationdemo1.models.UtilisateurDTO;
+import com.ca.formation.formationdemo1.models.DTO;
 import com.ca.formation.formationdemo1.services.PersonneService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -230,7 +231,18 @@ public class PersonneControllerTest{
         assertNotNull(contentAsString);
 
     }
-  
+   @Test
+    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
+    public void createPersonneAPI() throws Exception
+    {
+        mockMvc.perform( MockMvcRequestBuilders
+                        .post("/ajouterPersonne")
+                        .content(asJsonString(new PersonneDTO("firstName4", "lastName4", 30)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
    public static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
