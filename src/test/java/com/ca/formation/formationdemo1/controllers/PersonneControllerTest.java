@@ -5,7 +5,7 @@ import com.ca.formation.formationdemo1.models.Personne;
 
 import com.ca.formation.formationdemo1.models.Role;
 import com.ca.formation.formationdemo1.models.UtilisateurDTO;
-import com.ca.formation.formationdemo1.models.DTO;
+import com.ca.formation.formationdemo1.models.PersonneDTO;
 import com.ca.formation.formationdemo1.services.PersonneService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
