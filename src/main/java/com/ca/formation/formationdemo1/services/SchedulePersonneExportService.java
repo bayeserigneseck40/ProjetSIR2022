@@ -15,6 +15,6 @@ public class SchedulePersonneExportService {
     Logger logger = LoggerFactory.getLogger(SchedulePersonneExportService.class);
     public void envoyerListePersonnes(){
 
-        logger.info(" Envoyer la liste des personne - "+System.currentTimeMillis()/1000);
+        logger.info(" Envoyer la liste des personne - {}",System.currentTimeMillis()/1000);
     }
 }
