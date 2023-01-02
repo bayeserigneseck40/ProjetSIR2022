@@ -230,4 +230,22 @@ public class PersonneControllerTest{
         assertNotNull(contentAsString);
 
     }
+     @Test
+    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
+    public void createPersonneAPI() throws Exception
+    {
+        mockMvc.perform( MockMvcRequestBuilders
+                        .post("/ajouterPersonne")
+                        .content(asJsonString(new Personne("firstName4", "lastName4", 30)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+   public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
