@@ -66,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         // activer les cors et desactiver les CSRF
-        http = http.cors().and().csrf().disable();
+        http = http.cors().and();
 
         // Mettre la getion de la session a un sans etat
         http = http
@@ -79,8 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                         .authenticationEntryPoint(
                                 ((request, response, authException) -> {
-                                    logger.info("Demande pas autoriser - ");
-                                    logger.info(authException.getMessage());
+                                    logger.info("Demande pas autoriser - {}",authException.getMessage());
                                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
                                 })
                         )
