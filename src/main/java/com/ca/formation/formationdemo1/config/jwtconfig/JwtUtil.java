@@ -6,11 +6,9 @@ import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.stream.Collectors;
 
 @Component
 public class JwtUtil {
@@ -24,7 +22,7 @@ public class JwtUtil {
 
     public String generateAccesToken(Utilisateur utilisateur){
         Claims claims = Jwts.claims().setSubject(utilisateur.getUsername());
-        claims.put("scopes", utilisateur.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
+        claims.put("scopes", utilisateur.getAuthorities().stream().toList());
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(utilisateur.getName()+","+utilisateur.getUsername())
