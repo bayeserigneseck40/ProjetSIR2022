@@ -6,7 +6,7 @@ pipeline{
     stages{
         stage('Source') {
             steps{
-                git branch: 'main', url: 'https://github.com/bayembacke221/projet-sir-2022.git'
+                git branch: 'main', url: 'https://github.com/bayeserigneseck40/ProjetSIR2022.git'
             }
         }
         stage ('Build') {
