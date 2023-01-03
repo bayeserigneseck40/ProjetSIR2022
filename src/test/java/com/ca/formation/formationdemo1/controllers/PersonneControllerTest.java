@@ -246,8 +246,8 @@ public class PersonneControllerTest{
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
-        //.andExpect(MockMvcResultMatchers.jsonPath("$.employees").exists())
-        //.andExpect(MockMvcResultMatchers.jsonPath("$.employees[*].employeeId").isNotEmpty());
+      
+       
     }
     @Test
     @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
