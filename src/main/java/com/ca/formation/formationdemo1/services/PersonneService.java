@@ -18,4 +18,11 @@ public interface PersonneService {
     void deletePersonne(Long id);
 
     List<Personne> getPersonneParNom(String nom);
+    
+     List<Personne> getPersonneParNomAndPrenom(String nom,String prenom);
+
+    List<Personne> getPersonneNomAndPrenom(String nom,String prenom);
+
+    List<Personne> getPersonneNomAndPrenom2(String nom,String prenom);
+
 }
