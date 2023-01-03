@@ -25,7 +25,6 @@ public class PersonneController {
     public String nouveauPersonne(PersonneDTO personne){
         return "nouveau";
     }
-
     @PostMapping("/ajouterPersonne")
     public String ajouterPersonne(PersonneDTO personne, Model model){
         Personne p = new Personne(personne.getNom(),personne.getPrenom(),personne.getAge());
