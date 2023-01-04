@@ -25,8 +25,7 @@ public class PersonneServiceImpl implements PersonneService {
 
     @Override
     public Personne getPersonne(Long id) throws ResourceNotFoundException {
-        return personneRepository.findById(id).orElseThrow(() ->
-                new ResourceNotFoundException("Personne non trouvé "));
+        return personneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Personne non trouvé "));
     }
 
     @Override
@@ -48,7 +47,6 @@ public class PersonneServiceImpl implements PersonneService {
 
     @Override
     public Personne addPersonne(Personne personne) {
-    
         return personneRepository.save(personne);
     }
 
@@ -76,7 +74,8 @@ public class PersonneServiceImpl implements PersonneService {
     public List<Personne> getPersonneNomAndPrenom2(String nom, String prenom) {
         return  personneRepository.findNomPrenom2(nom,prenom);
     }
-     @Override
+
+    @Override
     public List<Personne> ageGreaterThan(int age) {
        return personneRepository.ageGreaterThan(age);
     }

@@ -49,10 +49,11 @@ public class ProjetSIRApplication {
 
       List<Personne> personneList = repository.findByNomAndPrenom("Abdel", "Moussa");
 
-      personneList.stream().forEach(e->logger.info("value {}",e));
+      personneList.stream().forEach(myPojo -> logger.info(myPojo.toString()));
 
     });
   }
+
   @Bean
   public ClassLoaderTemplateResolver templateResolver() {
     ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();

@@ -1,12 +1,16 @@
 package com.ca.formation.formationdemo1.models;
 
+import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
 @Entity
 public class Utilisateur implements UserDetails, Serializable {
 
@@ -14,7 +18,7 @@ public class Utilisateur implements UserDetails, Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
+    private boolean enabled = true;
     private String username;
     private String password;
     private String name;
@@ -41,9 +45,12 @@ public class Utilisateur implements UserDetails, Serializable {
     }
 
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public String getUsername() {
         return username;
@@ -51,17 +58,17 @@ public class Utilisateur implements UserDetails, Serializable {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return this.enabled;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return this.enabled;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return this.enabled;
     }
 
     public void setUsername(String username) {
@@ -69,7 +76,7 @@ public class Utilisateur implements UserDetails, Serializable {
     }
 
     @Override
-    public Set<Role> getAuthorities() {
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         return authoritie;
     }
 
@@ -90,7 +97,7 @@ public class Utilisateur implements UserDetails, Serializable {
     }
 
     public Set<Role> getAuthoritie() {
-        return authoritie;
+        return this.authoritie;
     }
 
     public void setAuthoritie(Set<Role> authoritie) {

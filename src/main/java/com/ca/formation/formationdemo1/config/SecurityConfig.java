@@ -43,8 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${springdoc.swagger-ui.path}")
     private String swaggerPath;
 
+
+
     public SecurityConfig(UtilisateurRepository utilisateurRepository, JwtFilter jwtFilter) {
-        super();
 
         this.utilisateurRepository = utilisateurRepository;
         this.jwtFilter = jwtFilter;
@@ -59,7 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         () -> new UsernameNotFoundException(
                                 format("utilisateur: %s,  pas trouvé", username)
                         )
-                )).passwordEncoder(passwordEncoder());
+
+                ));
     }
 
     @Override
@@ -79,7 +81,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                         .authenticationEntryPoint(
                                 ((request, response, authException) -> {
-                                    logger.info("Demande pas autoriser - {}",authException.getMessage());
+                                    logger.info("Demande pas autoriser - ");
+                                    logger.info(authException.getMessage());
                                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
                                 })
                         )
@@ -111,4 +114,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception{
         return super.authenticationManagerBean();
     }
+
+
 }
