@@ -24,5 +24,7 @@ public interface PersonneService {
     List<Personne> getPersonneNomAndPrenom(String nom,String prenom);
 
     List<Personne> getPersonneNomAndPrenom2(String nom,String prenom);
+    
+    List<Personne> ageGreaterThan(int age);
 
 }
