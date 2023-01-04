@@ -67,7 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         // activer les cors et desactiver les CSRF
-        http = http.cors().and().csrf().disable();
+        http = http.cors().and();
+        http.csrf().disable();
 
         // Mettre la getion de la session a un sans etat
         http = http

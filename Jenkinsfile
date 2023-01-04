@@ -19,6 +19,9 @@ pipeline{
                 bat 'mvn sonar:sonar'
             }
         }
+        stage('Build image') {
+             dockerImage = docker.build("bayembacke221/demo-sir:latest")
+        }
 
     } // stages
 
