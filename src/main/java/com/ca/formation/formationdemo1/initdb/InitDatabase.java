@@ -1,6 +1,5 @@
 package com.ca.formation.formationdemo1.initdb;
 
-import com.ca.formation.formationdemo1.ProjetSIRApplication;
 import com.ca.formation.formationdemo1.models.Role;
 import com.ca.formation.formationdemo1.models.Utilisateur;
 import com.ca.formation.formationdemo1.services.UtilisateurService;
@@ -16,7 +15,7 @@ import java.util.Set;
 public class InitDatabase implements ApplicationListener<ApplicationReadyEvent> {
 
   private UtilisateurService utilisateurService;
-  Logger logger = LoggerFactory.getLogger(ProjetSIRApplication.class);
+  Logger logger = LoggerFactory.getLogger(InitDatabase.class);
 
 
 
@@ -34,7 +33,7 @@ public class InitDatabase implements ApplicationListener<ApplicationReadyEvent> 
     utilisateurService
           .registration(new Utilisateur("clara@formation.sn", "Passer@123", "Clara", Set.of(new Role(Role.ADMIN))));
     } catch (Exception e) {
-      logger.info("{}",e);
+      logger.info(e.getMessage());
     }
   }
 }

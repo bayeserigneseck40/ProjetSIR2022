@@ -190,7 +190,7 @@ public class PersonneControllerTest{
     @ParameterizedTest
     @CsvSource({"age?nom=40", "bbb?nom=Abdel&prenom=Moussa", "ccc?nom=Abdel&prenom=Moussa","aaa?nom=Abdel&prenom=Moussa","search?nom=Abdel","2"})
     @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = {"READ"})
-     void ageGreaterThan(String input) throws Exception {
+    void ageGreaterThan(String input) throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .get("/api/v2/personnes/"+input)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest)
@@ -224,8 +224,8 @@ public class PersonneControllerTest{
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
-      
-       
+
+
     }
     @Test
     @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
@@ -282,7 +282,7 @@ public class PersonneControllerTest{
             throw new RuntimeException(e);
         }
     }
-      @Test
+    @Test
     @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = {"READ"})
     public void getPersonneNomAndPrenom() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
@@ -327,7 +327,7 @@ public class PersonneControllerTest{
         assertNotNull(contentAsString);
 
     }
-     @Test
+    @Test
     @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = {"READ"})
     public void ageGreaterThan() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
