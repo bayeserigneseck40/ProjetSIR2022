@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class PersonneController {
 
     private final PersonneRepository repository;
-
     public PersonneController(PersonneRepository repository) {
         this.repository = repository;
     }
