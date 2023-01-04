@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  app:
+    container_name: projet-sir-2022
+    image: projet-sir-2022
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+        - "8080:8080"
+    depends_on:
+      - dbmysql
+
+  dbmysql:
+    container_name: projet-sir-2022-db
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: db_formation
+      MYSQL_ROOT_PASSWORD: ucad2022
+    volumes:
+      - ./db:/var/lib/mysql

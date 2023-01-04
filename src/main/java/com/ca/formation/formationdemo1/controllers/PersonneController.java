@@ -21,12 +21,10 @@ public class PersonneController {
         model.addAttribute("personnes", repository.findAll());
         return "index";
     }
-
     @GetMapping("/nouveau")
     public String nouveauPersonne(PersonneDTO personne){
         return "nouveau";
     }
-
     @PostMapping("/ajouterPersonne")
     public String ajouterPersonne(PersonneDTO personne, Model model){
         Personne p = new Personne(personne.getNom(),personne.getPrenom(),personne.getAge());
