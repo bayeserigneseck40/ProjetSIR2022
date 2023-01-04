@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Build') {
             steps{
-                bat 'docker build -t bayeserigneseck/myrepository:""$BUILD_ID"" .'
+                bat 'docker build -t myrepository/myrepositorydemo:""$BUILD_ID"" .'
             }
         }
         stage ('publish') {
