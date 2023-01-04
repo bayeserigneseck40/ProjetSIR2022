@@ -11,6 +11,7 @@ pipeline{
             steps{
                  'withDockerRegistry([credentialsId:"docker-hub",url:"" ]){
                   bat 'docker push bayeserigneseck/myrepository:""$BUILD_ID"" '
+            }
                 
             }
         }
