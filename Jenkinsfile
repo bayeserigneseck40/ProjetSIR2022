@@ -1,26 +1,18 @@
 pipeline{
     agent any
-    tools{
-        maven "3.6.3"
-    }
     stages{
-        stage('Source') {
+        stage('Build') {
             steps{
-                git branch: 'main', url: 'https://github.com/bayeserigneseck40/ProjetSIR2022.git'
+                bat 'printenv'
+                bat 'docker build -t bayeserigneseck/myrepository:""$BUILD_ID"" .'
             }
         }
-        stage ('Build') {
+        stage ('publish') {
             steps{
-                bat 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install'
+                 'withDockerRegistry([credentialsId:"docker-hub",url:"" ]){
+                  bat 'docker push bayeserigneseck/myrepository:""$BUILD_ID"" '
+                
             }
-        }
-        stage ('SonarQube Analysis') {
-            steps{
-                bat 'mvn sonar:sonar'
-            }
-        }
-        stage('Build image') {
-             dockerImage = docker.build("bayembacke221/demo-sir:latest")
         }
 
     } // stages
