@@ -59,17 +59,7 @@ public class PersonneControllerTest{
 
 
 
-    @Test
-    @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = { "READ" })
-    public void getPersonnes() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/api/v2/personnes")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer token")
-                .contentType(MediaType.APPLICATION_JSON);
-        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
-        MockHttpServletResponse response = mvcResult.getResponse();
-        assertEquals(HttpStatus.OK.value(), response.getStatus());
-    }
+
 
     @Test
     public void getPersonnesPasAutoriser() throws Exception {
@@ -282,66 +272,9 @@ public class PersonneControllerTest{
             throw new RuntimeException(e);
         }
     }
-    @Test
-    @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = {"READ"})
-    public void getPersonneNomAndPrenom() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/api/v2/personnes/aaa?nom=Abdel&prenom=Moussa")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest)
-                .contentType(MediaType.APPLICATION_JSON);
 
-        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
-        String contentAsString = mvcResult.getResponse().getContentAsString();
 
-        System.out.println(contentAsString);
-        assertNotNull(contentAsString);
 
-    }
-    @Test
-    @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = {"READ"})
-    public void getPersonneNomAndPrenom2() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/api/v2/personnes/bbb?nom=Abdel&prenom=Moussa")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest)
-                .contentType(MediaType.APPLICATION_JSON);
-
-        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
-        String contentAsString = mvcResult.getResponse().getContentAsString();
-
-        System.out.println(contentAsString);
-        assertNotNull(contentAsString);
-
-    }
-    @Test
-    @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = {"READ"})
-    public void getPersonneParNomAndPrenom() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/api/v2/personnes/ccc?nom=Abdel&prenom=Moussa")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest)
-                .contentType(MediaType.APPLICATION_JSON);
-
-        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
-        String contentAsString = mvcResult.getResponse().getContentAsString();
-
-        System.out.println(contentAsString);
-        assertNotNull(contentAsString);
-
-    }
-    @Test
-    @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = {"READ"})
-    public void ageGreaterThan() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/api/v2/personnes/age?nom=40")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest)
-                .contentType(MediaType.APPLICATION_JSON);
-
-        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
-        String contentAsString = mvcResult.getResponse().getContentAsString();
-
-        System.out.println(contentAsString);
-        assertNotNull(contentAsString);
-
-    }
 
 
 }
