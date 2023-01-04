@@ -108,6 +108,10 @@ public class ApiPersonneController {
     public List<Personne> getPersonneNomAndPrenom2(@RequestParam(name = "nom")String nom,@RequestParam(name = "prenom") String prenom) {
         return  personneService.getPersonneNomAndPrenom2(nom,prenom);
     }
+     @GetMapping("/age")
+    public List<Personne> ageGreaterThan(@RequestParam(name = "nom") int age) {
+        return  personneService.ageGreaterThan(age);
+    }
 
 
 }
