@@ -94,10 +94,6 @@
             <version>5.4.6</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.sonarsource.scanner.maven</groupId>
@@ -120,7 +116,7 @@
             <properties>
                 <sonar.host.url>http://localhost:9000</sonar.host.url>
                 <sonar.login>admin</sonar.login>
-                <sonar.password>serigne#03</sonar.password>
+                <sonar.password>admin123</sonar.password>
             </properties>
         </profile>
     </profiles>

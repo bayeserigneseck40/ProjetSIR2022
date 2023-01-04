@@ -1,5 +1,6 @@
 package com.ca.formation.formationdemo1.config.jwtconfig;
 
+import org.springframework.beans.factory.annotation.Value;
 
 import com.ca.formation.formationdemo1.models.Utilisateur;
 import io.jsonwebtoken.*;
@@ -15,15 +16,15 @@ import java.util.stream.Collectors;
 public class JwtUtil {
 
     // mettre le jwtSecret= "Base-64"
-    private  static String jwtSecret="TWV0dHJlIG1vbiB0b2tlbiBlbiBiYXNlIDY0IA==";
-
+    @Value("${bayembacke.app.jwtSecret}")
+    private  String jwtSecret;
     // generer JWT
 
     Logger logger= LoggerFactory.getLogger(JwtUtil.class);
 
     public String generateAccesToken(Utilisateur utilisateur){
         Claims claims = Jwts.claims().setSubject(utilisateur.getUsername());
-        claims.put("scopes", utilisateur.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
+        claims.put("scopes", utilisateur.getAuthorities().stream().toList());
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(utilisateur.getName()+","+utilisateur.getUsername())
