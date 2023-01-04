@@ -9,7 +9,7 @@ pipeline{
         stage ('publish') {
             steps{
                   withDockerRegistry([credentialsId:"docker-hub",url:"" ]){
-                  bat 'docker push bayeserigneseck/myrepository:""$BUILD_ID"" '
+                  bat 'docker push myrepository/myrepositorydemo:""$BUILD_ID"" '
             }
                 
             }
