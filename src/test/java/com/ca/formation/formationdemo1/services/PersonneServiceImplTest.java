@@ -121,6 +121,19 @@ public class PersonneServiceImplTest {
     assertEquals(0, personList.size());
     verify(personneRepository, atLeastOnce()).findByNom("tonux");
   }
-
+   @Test
+  public void ageGreaterThan() {
+    //Given
+    List<Personne> list = new ArrayList<Personne>();
+    list.add(new Personne("tonux","samb",50));
+    list.add(new Personne("tonux","mbacke",23));
+    list.add(new Personne("seck","baye",24));
+    when(personneRepository.findAll()).thenReturn(list);
+    //When
+    List<Personne> personList = personneServiceImpl.ageGreaterThan(40);
+    //Then
+    assertEquals(0, personList.size());
+    verify(personneRepository, atLeastOnce()).ageGreaterThan(40);
+  }
 
 }
