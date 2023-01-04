@@ -1,6 +1,6 @@
 package com.ca.formation.formationdemo1.config;
 
-import com.ca.formation.formationdemo1.config.jwtConfig.JwtFilter;
+import com.ca.formation.formationdemo1.config.jwtconfig.JwtFilter;
 import com.ca.formation.formationdemo1.repositories.UtilisateurRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,8 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${springdoc.swagger-ui.path}")
     private String swaggerPath;
 
+
+
     public SecurityConfig(UtilisateurRepository utilisateurRepository, JwtFilter jwtFilter) {
-        super();
 
         this.utilisateurRepository = utilisateurRepository;
         this.jwtFilter = jwtFilter;
@@ -59,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         () -> new UsernameNotFoundException(
                                 format("utilisateur: %s,  pas trouvé", username)
                         )
+
                 ));
     }
 
@@ -112,4 +114,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception{
         return super.authenticationManagerBean();
     }
+
+
 }

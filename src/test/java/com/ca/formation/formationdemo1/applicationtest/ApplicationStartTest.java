@@ -7,7 +7,7 @@ package com.ca.formation.formationdemo1.applicationtest;
 
 @RunWith(SpringRunner.class)
 public class ApplicationStartTest {
-    @Test
+    @Test(expected = Test.None.class /* no exception expected */)
     public void applicationStarts() {
         ProjetSIRApplication.main(new String[] {});
     }

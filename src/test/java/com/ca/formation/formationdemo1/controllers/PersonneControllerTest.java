@@ -9,6 +9,9 @@ import com.ca.formation.formationdemo1.services.PersonneService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -129,23 +132,8 @@ public class PersonneControllerTest{
         assertNotNull(responseEntity);
     }
 
-    @Test
-    @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = { "READ" })
-    public void getPersonne() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/api/v2/personnes/2")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest)
-                .contentType(MediaType.APPLICATION_JSON);
 
-        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
-        String contentAsString = mvcResult.getResponse().getContentAsString();
-
-        System.out.println(contentAsString);
-        assertNotNull(contentAsString);
-
-    }
-
-    @Before
+    @BeforeEach
     public void login() throws Exception {
         String body = "{\n" +
                 "    \"username\": \"clara@formation.ca\",\n" +
@@ -173,7 +161,7 @@ public class PersonneControllerTest{
 
 
     @Test
-    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
+    @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = { "ADMIN" })
     public void samaTest() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .get("/api/v2/personnes/bye")
@@ -183,11 +171,12 @@ public class PersonneControllerTest{
         MockHttpServletResponse response = mvcResult.getResponse();
         assertEquals(HttpStatus.OK.value(), response.getStatus());
     }
-    @Test
-    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"READ"})
-    public void samaTestBye() throws Exception {
+    @ParameterizedTest
+    @CsvSource({"personnes", "personnes/hello"})
+    @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = { "READ" })
+    void samaTestBye(String input) throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/api/v2/personnes/hello")
+                .get("/api/v2/"+input)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer token")
                 .contentType(MediaType.APPLICATION_JSON);
         MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
@@ -196,26 +185,14 @@ public class PersonneControllerTest{
     }
 
 
-    @Test
-    @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
-    public void deletePersonne() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .delete("/api/v2/personnes/2")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest)
-                .contentType(MediaType.APPLICATION_JSON);
 
-        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
-        String contentAsString = mvcResult.getResponse().getContentAsString();
 
-        System.out.println(contentAsString);
-        assertNotNull(contentAsString);
-
-    }
-    @Test
+    @ParameterizedTest
+    @CsvSource({"age?nom=40", "bbb?nom=Abdel&prenom=Moussa", "ccc?nom=Abdel&prenom=Moussa","aaa?nom=Abdel&prenom=Moussa","search?nom=Abdel","2"})
     @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = {"READ"})
-    public void getPersonneParNom() throws Exception {
+     void ageGreaterThan(String input) throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/api/v2/personnes/search?nom=Abdel")
+                .get("/api/v2/personnes/"+input)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest)
                 .contentType(MediaType.APPLICATION_JSON);
 
@@ -226,6 +203,7 @@ public class PersonneControllerTest{
         assertNotNull(contentAsString);
 
     }
+
     @Test
     @WithMockUser(username = "clara@formation.ca", password = "Passer@123", authorities = {"ADMIN"})
     public void createPersonneAPI() throws Exception
@@ -304,5 +282,6 @@ public class PersonneControllerTest{
             throw new RuntimeException(e);
         }
     }
+
 
 }

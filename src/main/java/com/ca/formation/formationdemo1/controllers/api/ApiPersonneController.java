@@ -2,6 +2,7 @@ package com.ca.formation.formationdemo1.controllers.api;
 
 import com.ca.formation.formationdemo1.exception.ResourceNotFoundException;
 import com.ca.formation.formationdemo1.models.Personne;
+import com.ca.formation.formationdemo1.models.PersonneDTO;
 import com.ca.formation.formationdemo1.models.Role;
 import com.ca.formation.formationdemo1.services.PersonneService;
 import org.springframework.http.ResponseEntity;
@@ -60,15 +61,22 @@ public class ApiPersonneController {
     }
 
     @PostMapping
-    public ResponseEntity<Personne> addPersonne(@RequestBody Personne personne){
-        Personne personneResponse = personneService.addPersonne(personne);
+    public ResponseEntity<Personne> addPersonne(@RequestBody PersonneDTO personne){
+        Personne pers =new Personne();
+        pers.setPrenom(personne.getPrenom());
+        pers.setNom(personne.getNom());
+        pers.setAge(personne.getAge());
+        Personne personneResponse = personneService.addPersonne(pers);
         return ResponseEntity.ok().body(personneResponse);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Personne> updatePersonne(@PathVariable(value="id") Long id, @RequestBody Personne personneRequest ) throws Exception {
-
-        Personne personne = personneService.updatePersonne(id, personneRequest);
+    public ResponseEntity<Personne> updatePersonne(@PathVariable(value="id") Long id, @RequestBody PersonneDTO personneRequest ) throws Exception {
+       Personne pers =new Personne();
+       pers.setPrenom(personneRequest.getPrenom());
+       pers.setNom(personneRequest.getNom());
+       pers.setAge(personneRequest.getAge());
+        Personne personne = personneService.updatePersonne(id, pers);
 
         return ResponseEntity.ok().body(personne);
     }
@@ -86,5 +94,25 @@ public class ApiPersonneController {
     }
 
 
+
+    @GetMapping("/ccc")
+    public List<Personne> getPersonneParNomAndPrenom(@RequestParam(name = "nom")String nom,@RequestParam(name = "prenom")String prenom) {
+        return  personneService.getPersonneParNomAndPrenom(nom,prenom);
+    }
+
+    @GetMapping("/aaa")
+    public List<Personne> getPersonneNomAndPrenom(@RequestParam(name = "nom")String nom, @RequestParam(name = "prenom")String prenom) {
+        return  personneService.getPersonneNomAndPrenom(nom,prenom);
+    }
+
+    @GetMapping("/bbb")
+    public List<Personne> getPersonneNomAndPrenom2(@RequestParam(name = "nom")String nom,@RequestParam(name = "prenom") String prenom) {
+        return  personneService.getPersonneNomAndPrenom2(nom,prenom);
+    }
+
+    @GetMapping("/age")
+    public List<Personne> ageGreaterThan(@RequestParam(name = "nom") int age) {
+        return  personneService.ageGreaterThan(age);
+    }
 
 }

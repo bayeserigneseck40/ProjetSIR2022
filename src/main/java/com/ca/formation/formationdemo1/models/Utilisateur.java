@@ -1,5 +1,6 @@
 package com.ca.formation.formationdemo1.models;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,6 +10,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
 @Entity
 public class Utilisateur implements UserDetails, Serializable {
 
@@ -56,17 +58,17 @@ public class Utilisateur implements UserDetails, Serializable {
 
     @Override
     public boolean isAccountNonExpired() {
-        return enabled;
+        return this.enabled;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return enabled;
+        return this.enabled;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return enabled;
+        return this.enabled;
     }
 
     public void setUsername(String username) {
@@ -95,7 +97,7 @@ public class Utilisateur implements UserDetails, Serializable {
     }
 
     public Set<Role> getAuthoritie() {
-        return authoritie;
+        return this.authoritie;
     }
 
     public void setAuthoritie(Set<Role> authoritie) {

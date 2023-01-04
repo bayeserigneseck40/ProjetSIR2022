@@ -2,7 +2,6 @@ package com.ca.formation.formationdemo1;
 
 import com.ca.formation.formationdemo1.models.Personne;
 import com.ca.formation.formationdemo1.repositories.PersonneRepository;
-import com.ca.formation.formationdemo1.services.SchedulePersonneExportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import java.util.List;
@@ -51,7 +49,7 @@ public class ProjetSIRApplication {
 
       List<Personne> personneList = repository.findByNomAndPrenom("Abdel", "Moussa");
 
-      personneList.stream().forEach(System.out::println);
+      personneList.stream().forEach(myPojo -> logger.info(myPojo.toString()));
 
     });
   }
