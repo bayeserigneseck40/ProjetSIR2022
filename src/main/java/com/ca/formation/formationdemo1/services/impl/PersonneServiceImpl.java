@@ -76,5 +76,10 @@ public class PersonneServiceImpl implements PersonneService {
     public List<Personne> getPersonneNomAndPrenom2(String nom, String prenom) {
         return  personneRepository.findNomPrenom2(nom,prenom);
     }
+     @Override
+    public List<Personne> ageGreaterThan(int age) {
+       return personneRepository.ageGreaterThan(age);
+    }
+
 
 }
