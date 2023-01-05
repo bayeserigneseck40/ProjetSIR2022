@@ -3,7 +3,6 @@ pipeline{
  stages{
   stage('build'){
    steps{
-      bat 'printenv'
     bat 'docker build -t bayeserigneseck/myrepository:""$BUILD_ID"" .'
    }
   }
