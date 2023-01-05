@@ -13,23 +13,21 @@ git 'https://github.com/bayeserigneseck40/ProjetSIR2022.git'
 }
 stage('Building our image') {
 steps{
-script {
-dockerImage = docker.build registry + ":$BUILD_NUMBER"
-}
+
+ bat 'dockerImage = docker.build bayeserigneseck/myrepository ":$BUILD_NUMBER" '
 }
 }
 stage('Deploy our image') {
 steps{
-script {
-docker.withRegistry( '', registryCredential ) {
+
+ bat 'docker.withRegistry( '', 'docker-hub' )' {
 dockerImage.push()
-}
 }
 }
 }
 stage('Cleaning up') {
 steps{
-sh "docker rmi $registry:$BUILD_NUMBER"
+bat "docker rmi $registry:$BUILD_NUMBER"
 }
 }
 }
