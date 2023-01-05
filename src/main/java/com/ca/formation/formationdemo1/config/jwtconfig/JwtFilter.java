@@ -39,7 +39,6 @@ public class JwtFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-
         // Si le token est valide
         final String token=header.split(" ")[1].trim();
         if(!jwtUtil.validate(token)){
