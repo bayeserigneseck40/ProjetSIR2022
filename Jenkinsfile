@@ -1,34 +1,18 @@
-pipeline {
-environment {
-registry = "bayeserigneseck/myrepository"
-registryCredential = 'docker-hub'
-dockerImage = ''
-}
-agent any
-stages {
-stage('Cloning our Git') {
-steps {
-git 'https://github.com/bayeserigneseck40/ProjetSIR2022.git'
-}
-}
-stage('Building our image') {
-steps{
-
- bat 'dockerImage = docker.build bayeserigneseck/myrepository ":$BUILD_NUMBER" '
-}
-}
-stage('Deploy our image') {
-steps{
-
- withDockerRegistry([ credentialsId: "docker-hub", url:""] ) {
- bat 'dockerImage.push()'
-}
-}
-}
-stage('Cleaning up') {
-steps{
-bat "docker rmi $registry:$BUILD_NUMBER"
-}
-}
-}
+pipeline{
+ agent any 
+ stages{
+  stage('build'){
+   steps{
+      bat 'printenv'
+    bat 'docker build -t bayeserigneseck/myrepository:""$BUILD_ID"" .'
+   }
+  }
+  stage('Publish'){
+   steps{
+    witnDockerRegistry([credentialsId: "docker-hub", url:"" ]){
+     bat 'docker push bayeserigneseck/myrepository:""$BUILD_ID"" '
+    }
+   }
+  }
+ }
 }
