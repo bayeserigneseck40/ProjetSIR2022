@@ -20,7 +20,7 @@ steps{
 stage('Deploy our image') {
 steps{
 
-docker.withRegistry( '', 'docker-hub' ) {
+ withDockerRegistry([ credentialsId: "docker-hub", url:""] ) {
  bat 'dockerImage.push()'
 }
 }
