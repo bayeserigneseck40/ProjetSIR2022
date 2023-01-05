@@ -11,7 +11,7 @@ pipeline{
 	    stage('gitclone') {
 
 			steps {
-				git 'https://github.com/bayeserigneseck40/ProjetSIR2022.git'
+				 git branch: 'main', url: 'https://github.com/bayeserigneseck40/ProjetSIR2022.git'
 			}
 		}
 
