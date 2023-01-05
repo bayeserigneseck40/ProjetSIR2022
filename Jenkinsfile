@@ -2,9 +2,6 @@ pipeline{
 
 	agent any
 
-	environment {
-		DOCKERHUB_CREDENTIALS=credentials('docker-hub')
-	}
 
 	stages {
 	    
@@ -18,28 +15,32 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				sh 'docker build -t bayeserigneseck/myrepository:latest .'
+				bat 'docker build -t bayeserigneseck/myrepository:latest .'
 			}
 		}
+		
+		
 
 		stage('Login') {
 
 			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+				bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 			}
 		}
 
 		stage('Push') {
 
 			steps {
-				sh 'docker push bayeserigneseck/myrepository:latest'
+				withDockerRegistry([credentialsId: "docker-hub" ,url:"" ]){
+				bat 'docker push bayeserigneseck/myrepository:latest'
+				}
 			}
 		}
 	}
 
 	post {
 		always {
-			sh 'docker logout'
+			bat 'docker logout'
 		}
 	}
 
