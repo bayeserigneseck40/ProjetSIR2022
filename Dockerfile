@@ -1,4 +1,8 @@
 #Image de base
 FROM openjdk:17-alpine
-RUN for user in baye; do useradd $user; echo "1234" | passwd $user --stdin; done
-Run yum update -y && yum install mysql -y
+LABEL maintainer="sir@formation.com"
+VOLUME /main-app
+ADD target/formation-demo1-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 8080
+# java -jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
