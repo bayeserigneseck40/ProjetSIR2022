@@ -39,8 +39,8 @@ pipeline{
 		stage('Build deployment') {
 
 			steps {
-				bat 'kubectl create deployment projetsir2022 --image=projetsir2022/projet2022 '
-				bat 'kubectl expose deployment projetsir2022 --type=NodePort --port 8084 '
+				bat 'kubectl create deployment projetsir2022main --image=projetsir2022/projet2022 '
+				bat 'kubectl expose deployment projetsir2022main --type=NodePort --port 8085 '
 				
 			}
 		}
