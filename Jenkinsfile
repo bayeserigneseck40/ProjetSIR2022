@@ -20,14 +20,12 @@ pipeline{
 		}
 		
 		
-		stage('Build') {
+		stage('Build tag') {
 
 			steps {
 				bat 'docker tag  projetsir2022/projet2022:groupe2  projetsir2022/projet2022:groupe2 '
 			}
 		}
-	
-		
 
 		stage('Push') {
 
@@ -37,7 +35,7 @@ pipeline{
 				}
 			}
 		}
-	
+	   }
 
 	post {
 		always {
