@@ -15,7 +15,7 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				bat 'docker build -t groupe2:latest .'
+				bat 'docker build -t projet2022:groupe2 .'
 			}
 		}
 		
@@ -25,7 +25,7 @@ pipeline{
 
 			steps {
 				withDockerRegistry([credentialsId: "docker-hub" ,url:"" ]){
-				bat 'docker push projetsir2022/groupe2:latest'
+				bat 'docker push projetsir2022/projet2022:groupe2'
 				}
 			}
 		}
