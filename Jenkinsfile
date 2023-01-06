@@ -15,7 +15,7 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				bat 'docker build -t projetsir2022/projet2022:groupe2 .'
+				bat 'docker build -t projetsir2022/projet2022 .'
 			}
 		}
 		
@@ -23,7 +23,7 @@ pipeline{
 		stage('Build tag') {
 
 			steps {
-				bat 'docker tag  projetsir2022/projet2022:groupe2  projetsir2022/projet2022:groupe2 '
+				bat 'docker tag  projetsir2022/projet2022  projetsir2022/projet2022:groupe2 '
 			}
 		}
 
