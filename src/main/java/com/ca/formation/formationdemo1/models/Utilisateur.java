@@ -40,16 +40,9 @@ public class Utilisateur implements UserDetails, Serializable {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public boolean isEnabled() {
         return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
     public String getUsername() {
@@ -92,9 +85,6 @@ public class Utilisateur implements UserDetails, Serializable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Set<Role> getAuthoritie() {
         return this.authoritie;
