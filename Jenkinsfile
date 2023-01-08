@@ -26,7 +26,7 @@ pipeline{
 
         			steps {
         				withDockerRegistry([credentialsId: "docker-hub" ,url:"" ]){
-        				bat 'docker push projetsir2022/groupe2:groupe2'
+        				bat 'docker push projetsir2022/groupe2:latest'
         				}
         			}
         		}
