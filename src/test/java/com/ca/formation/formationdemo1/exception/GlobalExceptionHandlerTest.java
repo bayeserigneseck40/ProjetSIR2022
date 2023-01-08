@@ -46,7 +46,7 @@ class GlobalExceptionHandlerTest {
                 globalExceptionHandler.resourceNotFoundException(
                         resourceNotFoundException, request);
 
-        assertEquals(responseEntity.getStatusCode(), HttpStatus.NOT_FOUND);
+        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
         assertEquals(responseEntity.getBody().getMessage(), message);
     }
 }
