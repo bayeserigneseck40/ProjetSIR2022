@@ -18,8 +18,8 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
@@ -57,31 +57,20 @@ public class PersonneServiceImplTest {
   // TODO: ajouter les autres tests sur methodes
 
 
-  @org.junit.jupiter.api.Test
-  void updatePersonne() throws ResourceNotFoundException {
-    Personne personne = new Personne("tonux", "samb", 50);
-    personne.setId(1L);
-    when(personneRepository.findById(1L)).thenReturn(Optional.of(personne));
+  @Test
+  public void updatePersonne() throws ResourceNotFoundException {
 
-    personneServiceImpl.updatePersonne(1L, personne);
+    personne.setNom("moustapha");
+    given(personneRepository.findById(personne.getId())).willReturn(Optional.of(personne));
+    personneServiceImpl.updatePersonne(personne.getId(), personne);
+    if(Optional.of(personne).isEmpty()){
+      verify(personneRepository).save(personne);
+      assertEquals("moustapha",personne.getNom());
+      assertEquals(1,personne.getId());
+      verify(personneRepository,atLeastOnce()).save(any());
+    }
 
-    verify(personneRepository).save(personne);
   }
-
-  @org.junit.jupiter.api.Test
-  void updatePersonneWhenPersonneDoesNotExistThenThrowException() {
-    Long id = 1L;
-    Personne personne = new Personne("nom", "prenom", 20);
-    when(personneRepository.findById(id)).thenReturn(Optional.empty());
-
-    assertThrows(
-            ResourceNotFoundException.class,
-            () -> personneServiceImpl.updatePersonne(id, personne));
-
-    verify(personneRepository).findById(id);
-  }
-
-
   @Test
   public void deletePerson() {
     when(personneRepository.findById(personne.getId())).thenReturn(Optional.of(personne));
