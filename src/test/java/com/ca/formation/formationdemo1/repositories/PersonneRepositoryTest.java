@@ -69,7 +69,7 @@ public class PersonneRepositoryTest {
     list.add(new Personne("tonux", "samb", 50));
     list.add(new Personne("lahad","mbacke",24));
     list.add(new Personne("baye","seck",24));
-    list.add(new Personne("moussa","diop",25));
+    list.add(new Personne("moussa","diop",23));
     list.add(new Personne("marieme","aidara",24));
     personneRepository.saveAll(list);
 
