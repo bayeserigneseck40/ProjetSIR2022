@@ -40,7 +40,7 @@ pipeline{
         			}
         		}
 
-        		stage('Build') {
+        		stage('dockerBuild') {
 
         			steps {
         				sh 'docker build -t projetsir2022/projet2022 .'
