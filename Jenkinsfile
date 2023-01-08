@@ -11,12 +11,12 @@ pipeline{
         }
         stage ('Build') {
             steps{
-                sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install'
+                bat 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install'
             }
         }
         stage ('SonarQube Analysis') {
             steps{
-                sh 'mvn sonar:sonar'
+                bat 'mvn sonar:sonar'
             }
         }
 
@@ -25,12 +25,12 @@ pipeline{
                         message 'voulez vous faire le deployment'
                     }
                     steps{
-                    sh 'echo "Build termine"'
+                    bat 'echo "Build termine"'
                     }
                 }
                     stage ('Notifier') {
                             steps{
-                                sh 'echo "Build termine"'
+                                bat 'echo "Build termine"'
                             }
                         }
                    stage('gitclone') {
@@ -43,7 +43,7 @@ pipeline{
         		stage('dockerBuild') {
 
         			steps {
-        				sh 'docker build -t projetsir2022/projet2022 .'
+        				bat 'docker build -t projetsir2022/projet2022 .'
         			}
         		}
 
@@ -51,7 +51,7 @@ pipeline{
         		stage('Build tag') {
 
         			steps {
-        				sh 'docker tag  projetsir2022/projet2022  projetsir2022/projet2022:groupe2 '
+        				bat 'docker tag  projetsir2022/projet2022  projetsir2022/projet2022:groupe2 '
         			}
         		}
 
@@ -59,7 +59,7 @@ pipeline{
 
         			steps {
         				withDockerRegistry([credentialsId: "docker-hub" ,url:"" ]){
-        				sh 'docker push projetsir2022/projet2022:groupe2'
+        				bat 'docker push projetsir2022/projet2022:groupe2'
         				}
         			}
         		}
