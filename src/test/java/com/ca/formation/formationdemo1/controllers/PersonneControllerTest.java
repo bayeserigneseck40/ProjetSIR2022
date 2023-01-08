@@ -139,7 +139,7 @@ public class PersonneControllerTest{
     }
     @Test
     public void ajouterPerson_() throws Exception {
-        Personne personne = new Personne("tonux", "samb", 40);
+        Personne personne = new Personne("baye", "seck", 40);
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest);
         HttpEntity<Personne> entity = new HttpEntity<Personne>(null, headers);
